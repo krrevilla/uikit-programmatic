@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		BD2EC6FB2A95809A003974BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC6FA2A95809A003974BD /* AppDelegate.swift */; };
 		BD2EC6FD2A95809A003974BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC6FC2A95809A003974BD /* SceneDelegate.swift */; };
-		BD2EC6FF2A95809A003974BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC6FE2A95809A003974BD /* ViewController.swift */; };
-		BD2EC7022A95809A003974BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD2EC7002A95809A003974BD /* Main.storyboard */; };
+		BD2EC6FF2A95809A003974BD /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC6FE2A95809A003974BD /* FeaturedViewController.swift */; };
 		BD2EC7042A95809B003974BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD2EC7032A95809B003974BD /* Assets.xcassets */; };
 		BD2EC7072A95809B003974BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD2EC7052A95809B003974BD /* LaunchScreen.storyboard */; };
 		BD2EC7122A95809B003974BD /* MyCourseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC7112A95809B003974BD /* MyCourseTests.swift */; };
 		BD2EC71C2A95809B003974BD /* MyCourseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC71B2A95809B003974BD /* MyCourseUITests.swift */; };
 		BD2EC71E2A95809B003974BD /* MyCourseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EC71D2A95809B003974BD /* MyCourseUITestsLaunchTests.swift */; };
+		BD2EC72D2A9589A8003974BD /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = BD2EC72C2A9589A8003974BD /* Inject */; };
+		BD5034722A96DB5D00A7C246 /* CourseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5034712A96DB5D00A7C246 /* CourseTableCell.swift */; };
+		BDEEA2F22A95D5EC00AFD019 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEEA2F12A95D5EC00AFD019 /* Course.swift */; };
+		BDEEA2F72A95DEE300AFD019 /* HandbookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEEA2F62A95DEE300AFD019 /* HandbookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +42,7 @@
 		BD2EC6F72A95809A003974BD /* MyCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2EC6FA2A95809A003974BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD2EC6FC2A95809A003974BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BD2EC6FE2A95809A003974BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BD2EC7012A95809A003974BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BD2EC6FE2A95809A003974BD /* FeaturedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		BD2EC7032A95809B003974BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD2EC7062A95809B003974BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD2EC7082A95809B003974BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +51,9 @@
 		BD2EC7172A95809B003974BD /* MyCourseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCourseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2EC71B2A95809B003974BD /* MyCourseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseUITests.swift; sourceTree = "<group>"; };
 		BD2EC71D2A95809B003974BD /* MyCourseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BD5034712A96DB5D00A7C246 /* CourseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableCell.swift; sourceTree = "<group>"; };
+		BDEEA2F12A95D5EC00AFD019 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		BDEEA2F62A95DEE300AFD019 /* HandbookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandbookCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD2EC72D2A9589A8003974BD /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,10 +105,11 @@
 		BD2EC6F92A95809A003974BD /* MyCourse */ = {
 			isa = PBXGroup;
 			children = (
+				BDEEA2F52A95DEC300AFD019 /* Cells */,
+				BDEEA2F02A95D5E200AFD019 /* Classes */,
 				BD2EC6FA2A95809A003974BD /* AppDelegate.swift */,
 				BD2EC6FC2A95809A003974BD /* SceneDelegate.swift */,
-				BD2EC6FE2A95809A003974BD /* ViewController.swift */,
-				BD2EC7002A95809A003974BD /* Main.storyboard */,
+				BD2EC72A2A9580AC003974BD /* ViewControllers */,
 				BD2EC7032A95809B003974BD /* Assets.xcassets */,
 				BD2EC7052A95809B003974BD /* LaunchScreen.storyboard */,
 				BD2EC7082A95809B003974BD /* Info.plist */,
@@ -127,6 +134,31 @@
 			path = MyCourseUITests;
 			sourceTree = "<group>";
 		};
+		BD2EC72A2A9580AC003974BD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BD2EC6FE2A95809A003974BD /* FeaturedViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BDEEA2F02A95D5E200AFD019 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BDEEA2F12A95D5EC00AFD019 /* Course.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BDEEA2F52A95DEC300AFD019 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BDEEA2F62A95DEE300AFD019 /* HandbookCell.swift */,
+				BD5034712A96DB5D00A7C246 /* CourseTableCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +175,9 @@
 			dependencies = (
 			);
 			name = MyCourse;
+			packageProductDependencies = (
+				BD2EC72C2A9589A8003974BD /* Inject */,
+			);
 			productName = MyCourse;
 			productReference = BD2EC6F72A95809A003974BD /* MyCourse.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +250,9 @@
 				Base,
 			);
 			mainGroup = BD2EC6EE2A95809A003974BD;
+			packageReferences = (
+				BD2EC72B2A9589A8003974BD /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = BD2EC6F82A95809A003974BD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,7 +271,6 @@
 			files = (
 				BD2EC7072A95809B003974BD /* LaunchScreen.storyboard in Resources */,
 				BD2EC7042A95809B003974BD /* Assets.xcassets in Resources */,
-				BD2EC7022A95809A003974BD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD2EC6FF2A95809A003974BD /* ViewController.swift in Sources */,
+				BDEEA2F22A95D5EC00AFD019 /* Course.swift in Sources */,
+				BDEEA2F72A95DEE300AFD019 /* HandbookCell.swift in Sources */,
+				BD2EC6FF2A95809A003974BD /* FeaturedViewController.swift in Sources */,
 				BD2EC6FB2A95809A003974BD /* AppDelegate.swift in Sources */,
 				BD2EC6FD2A95809A003974BD /* SceneDelegate.swift in Sources */,
+				BD5034722A96DB5D00A7C246 /* CourseTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +337,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BD2EC7002A95809A003974BD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BD2EC7012A95809A003974BD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BD2EC7052A95809B003974BD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +474,7 @@
 				INFOPLIST_FILE = MyCourse/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +502,7 @@
 				INFOPLIST_FILE = MyCourse/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,6 +634,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BD2EC72B2A9589A8003974BD /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BD2EC72C2A9589A8003974BD /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD2EC72B2A9589A8003974BD /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BD2EC6EF2A95809A003974BD /* Project object */;
 }
