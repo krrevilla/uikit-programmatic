@@ -7,13 +7,21 @@
 
 import UIKit
 
-class Handbooks: UIView {
+class HandbooksCollection: UIView {
     var data: [Course] = []
+    
+    let containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Handbooks"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.textColor = UIColor.secondaryLabel
         return label
     }()
     
@@ -29,27 +37,45 @@ class Handbooks: UIView {
         return collectionView
     }()
     
-//    init(data: [Course] = []) {
-//        self.data = data
-//
-//        self.addSubview(label)
-//        self.addSubview(collectionView)
-//
-//        NSLayoutConstraint.activate([
-//            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-//            label.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            label.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//
-//            collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
-//            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
-//        ])
-//    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupUI()
+    }
+    
+    func setupUI() {
+        self.addSubview(containerView)
+        containerView.addSubview(label)
+        containerView.addSubview(collectionView)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: self.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            label.topAnchor.constraint(equalTo: containerView.topAnchor),
+            label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+            collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 257),
+        ])
+    }
 }
 
 
-extension Handbooks: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HandbooksCollection: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var handbookCardWidth: CGFloat {
         150
     }
@@ -73,6 +99,8 @@ extension Handbooks: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         cell.gradientLayer.colors = handbook.courseGradient
         cell.imageView.image = handbook.courseBanner
         cell.logoView.image = handbook.courseIcon
+        
+        cell.setupUI()
         
         return cell
     }

@@ -41,7 +41,7 @@ let handbooks = [
         UIColor(red: 0.51, green: 0.255, blue: 0.737, alpha: 1).cgColor,
         UIColor(red: 0.883, green: 0.283, blue: 0.523, alpha: 1).cgColor,
         UIColor(red: 0.984, green: 0.647, blue: 0.545, alpha: 1).cgColor
-      ], sections: sections)
+      ], sections: sections),
 ]
 
 let courses = [

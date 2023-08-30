@@ -20,7 +20,7 @@
 		BD39BA9D2A9EB186003603A7 /* Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BA9C2A9EB186003603A7 /* Topics.swift */; };
 		BD39BA9F2A9EB6E9003603A7 /* SectionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BA9E2A9EB6E9003603A7 /* SectionTableCell.swift */; };
 		BD39BAA32A9F0AD8003603A7 /* SelfSizedTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BAA22A9F0AD8003603A7 /* SelfSizedTable.swift */; };
-		BD39BAA62A9F1CF6003603A7 /* Handbooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BAA52A9F1CF6003603A7 /* Handbooks.swift */; };
+		BD39BAA62A9F1CF6003603A7 /* HandbooksCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BAA52A9F1CF6003603A7 /* HandbooksCollection.swift */; };
 		BD39BAA82A9F31C4003603A7 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BAA72A9F31C4003603A7 /* TopicCell.swift */; };
 		BD39BAAA2A9F3F3B003603A7 /* SectionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39BAA92A9F3F3B003603A7 /* SectionCollectionCell.swift */; };
 		BD3FB4922A9DB41500BB2A8D /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB4912A9DB41500BB2A8D /* CourseViewController.swift */; };
@@ -67,7 +67,7 @@
 		BD39BA9C2A9EB186003603A7 /* Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topics.swift; sourceTree = "<group>"; };
 		BD39BA9E2A9EB6E9003603A7 /* SectionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableCell.swift; sourceTree = "<group>"; };
 		BD39BAA22A9F0AD8003603A7 /* SelfSizedTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTable.swift; sourceTree = "<group>"; };
-		BD39BAA52A9F1CF6003603A7 /* Handbooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handbooks.swift; sourceTree = "<group>"; };
+		BD39BAA52A9F1CF6003603A7 /* HandbooksCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandbooksCollection.swift; sourceTree = "<group>"; };
 		BD39BAA72A9F31C4003603A7 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		BD39BAA92A9F3F3B003603A7 /* SectionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionCell.swift; sourceTree = "<group>"; };
 		BD3FB4912A9DB41500BB2A8D /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				BD39BAA22A9F0AD8003603A7 /* SelfSizedTable.swift */,
-				BD39BAA52A9F1CF6003603A7 /* Handbooks.swift */,
+				BD39BAA52A9F1CF6003603A7 /* HandbooksCollection.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -342,7 +342,7 @@
 				BDEEA2F22A95D5EC00AFD019 /* Course.swift in Sources */,
 				BDEEA2F72A95DEE300AFD019 /* HandbookCell.swift in Sources */,
 				BD2EC6FF2A95809A003974BD /* CoursesViewController.swift in Sources */,
-				BD39BAA62A9F1CF6003603A7 /* Handbooks.swift in Sources */,
+				BD39BAA62A9F1CF6003603A7 /* HandbooksCollection.swift in Sources */,
 				BDCD0BCF2A9886FB00A87127 /* TabBarController.swift in Sources */,
 				BD39BA9F2A9EB6E9003603A7 /* SectionTableCell.swift in Sources */,
 				BD2EC6FB2A95809A003974BD /* AppDelegate.swift in Sources */,

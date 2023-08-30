@@ -121,27 +121,13 @@ class CoursesViewController: UIViewController {
     }()
     
     // MARK: Recent Handbooks
-    let recentHandbooksLabel: UILabel = {
-        let label = UILabel()
-        label.text = "RECENT HANDBOOKS"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        label.textColor = UIColor.secondaryLabel
-        return label
+    let handbooksCollection: HandbooksCollection = {
+        let view = HandbooksCollection()
+        view.data = handbooks
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.label.text = "RECENT HANDBOOKS"
+        return view
     }()
-    
-    let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(HandbookCell.self, forCellWithReuseIdentifier: HandbookCell.identifier)
-
-        return collectionView
-    }()
-    
     
     // MARK: Recent Courses
     let recentCoursesLabel: UILabel = {
@@ -281,25 +267,12 @@ class CoursesViewController: UIViewController {
     }
     
     func configureRecentHandbooks() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
-        contentView.addSubview(recentHandbooksLabel)
-
+        contentView.addSubview(handbooksCollection)
+        
         NSLayoutConstraint.activate([
-            recentHandbooksLabel.topAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: 35),
-            recentHandbooksLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            recentHandbooksLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
-        ])
-
-        collectionView.isScrollEnabled = false
-        contentView.addSubview(collectionView)
-
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: recentHandbooksLabel.bottomAnchor, constant: 20),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            collectionView.heightAnchor.constraint(equalToConstant: 257),
+            handbooksCollection.topAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: 35),
+            handbooksCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            handbooksCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
         ])
     }
     
@@ -330,7 +303,7 @@ class CoursesViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            recentCoursesLabel.topAnchor.constraint(equalTo: self.collectionView.bottomAnchor, constant: 16),
+            recentCoursesLabel.topAnchor.constraint(equalTo: self.handbooksCollection.bottomAnchor, constant: 16),
             recentCoursesLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             recentCoursesLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
@@ -340,46 +313,6 @@ class CoursesViewController: UIViewController {
             tableView.heightAnchor.constraint(equalToConstant: totalHeight),
             tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
         ])
-    }
-}
-
-
-extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    private var handbookCellWidth: CGFloat {
-        150
-    }
-    
-    private var handbookCellHeight: CGFloat {
-        257
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return handbooks.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HandbookCell.identifier, for: indexPath) as! HandbookCell
-        let handbook = handbooks[indexPath.item]
-
-        cell.containerView.frame = CGRect(x: 0, y: 0, width: self.handbookCellWidth, height: self.handbookCellHeight)
-        cell.cellTitle.text = handbook.courseTitle
-        cell.cellSubtitle.text = handbook.courseSubtitle
-        cell.cellDescription.text = handbook.courseDescription
-        cell.gradientLayer.colors = handbook.courseGradient
-        cell.imageView.image = handbook.courseBanner
-        cell.logoView.image = handbook.courseIcon
-        
-        cell.setupUI()
-
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.handbookCellWidth, height: self.handbookCellHeight)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
     }
 }
 

@@ -84,28 +84,15 @@ class ExploreViewController: UIViewController {
         return view
     }()
     
-    
-    let popularLabel: UILabel = {
-        let label = UILabel()
-        label.text = "POPULAR"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        label.textColor = UIColor.secondaryLabel
-        return label
+    // MARK: Popular
+    let popularCollection: HandbooksCollection = {
+        let view = HandbooksCollection()
+        view.data = handbooks
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.label.text = "POPULAR"
+        return view
     }()
     
-    let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(HandbookCell.self, forCellWithReuseIdentifier: HandbookCell.identifier)
-        collectionView.isScrollEnabled = false
-        
-        return collectionView
-    }()
     
     let recentCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -115,6 +102,8 @@ class ExploreViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(SectionCollectionCell.self, forCellWithReuseIdentifier: SectionCollectionCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 16)
         
         return collectionView
     }()
@@ -229,22 +218,13 @@ class ExploreViewController: UIViewController {
     }
     
     func configurePopular() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        contentView.addSubview(popularLabel)
-        contentView.addSubview(collectionView)
+        contentView.addSubview(popularCollection)
         
         NSLayoutConstraint.activate([
-            popularLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 16),
-            popularLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            popularLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            collectionView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor, constant: 16),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
-            collectionView.heightAnchor.constraint(equalToConstant: 257),
+            popularCollection.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 16),
+            popularCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            popularCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            popularCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
         ])
     }
 }
@@ -289,66 +269,41 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.recentCollection {
-            return sections.count
-        } else {
-            return handbooks.count
-        }
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.recentCollection {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionCollectionCell.identifier, for: indexPath) as! SectionCollectionCell
-            let section = sections[indexPath.item]
-            
-            cell.bannerImage.image = section.sectionBanner
-            cell.icon.image = section.sectionIcon
-            cell.sectionTitle.text = section.sectionTitle
-            cell.sectionSubtitle.text = section.sectionSubtitle
-            
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HandbookCell.identifier, for: indexPath) as! HandbookCell
-            let handbook = handbooks[indexPath.item]
-            
-            cell.containerView.frame = CGRect(x: 0, y: 0, width: self.handbookCellWidth, height: self.handbookCellHeight)
-            cell.cellTitle.text = handbook.courseTitle
-            cell.cellSubtitle.text = handbook.courseSubtitle
-            cell.cellDescription.text = handbook.courseDescription
-            cell.gradientLayer.colors = handbook.courseGradient
-            cell.imageView.image = handbook.courseBanner
-            cell.logoView.image = handbook.courseIcon
-            
-            cell.setupUI()
-            
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionCollectionCell.identifier, for: indexPath) as! SectionCollectionCell
+        let section = sections[indexPath.item]
+        
+        cell.bannerImage.image = section.sectionBanner
+        cell.icon.image = section.sectionIcon
+        cell.sectionTitle.text = section.sectionTitle
+        cell.sectionSubtitle.text = section.sectionSubtitle
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let inset: CGFloat = 16 // Adjust this value based on your preference
-        
-        if section == 0 {
-            // Add leading space to the first item in the first section
-            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: 0)
-        } else if section == collectionView.numberOfSections - 1 {
-            // Add trailing space to the last item in the last section
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: inset)
-        } else {
-            return UIEdgeInsets.zero
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        let inset: CGFloat = 16 // Adjust this value based on your preference
+//
+//        if section == 0 {
+//            // Add leading space to the first item in the first section
+//            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: 0)
+//        } else if section == collectionView.numberOfSections - 1 {
+//            // Add trailing space to the last item in the last section
+//            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: inset)
+//        } else {
+//            return UIEdgeInsets.zero
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if collectionView == self.recentCollection {
-            return CGSize(width: collectionView.frame.width / 2.2, height: 230)
-        } else {
-            return CGSize(width: handbookCellWidth, height: handbookCellHeight)
-        }
+        return CGSize(width: collectionView.frame.width / 2.2, height: 230)
     }
 }
