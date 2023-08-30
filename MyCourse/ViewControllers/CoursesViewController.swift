@@ -7,7 +7,9 @@
 
 import UIKit
 
-class FeaturedViewController: UIViewController {
+class CoursesViewController: UIViewController {
+    private var lastScrollYPosition: CGFloat = 0
+    
     // MARK: Background
     let backgroundImage: UIImageView = {
         let view = UIImageView()
@@ -130,13 +132,13 @@ class FeaturedViewController: UIViewController {
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
+        layout.scrollDirection = .horizontal
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(HandbookCell.self, forCellWithReuseIdentifier: HandbookCell.identifier)
-        
+
         return collectionView
     }()
     
@@ -163,28 +165,21 @@ class FeaturedViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: "PrimaryBackground")
-        title = "Featured"
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.scrollView.delegate = self
         
         configureScrollView()
         configureBanner()
         configureRecentHandbooks()
         configureCourses()
-     
+        
         view.layoutIfNeeded()
     }
     
     
     // MARK: Configure Scroll View
     func configureScrollView() {
-        view.addSubview(backgroundImage)
-        
-        NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
@@ -204,11 +199,19 @@ class FeaturedViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
         ])
+        
+        contentView.addSubview(backgroundImage)
+        
+        NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
     }
     
     // MARK: Configure Banner
     func configureBanner() {
-        scrollView.addSubview(bannerView)
+        contentView.addSubview(bannerView)
         
         let bannerViewLeadingAnchor = bannerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
         bannerViewLeadingAnchor.priority = UILayoutPriority(999)
@@ -225,8 +228,6 @@ class FeaturedViewController: UIViewController {
             bannerViewTrailingAnchor,
         ])
         
-        print(bannerView.frame)
-        
         bannerView.addSubview(bannerBlurView)
         
         NSLayoutConstraint.activate([
@@ -235,43 +236,43 @@ class FeaturedViewController: UIViewController {
             bannerBlurView.leadingAnchor.constraint(equalTo: bannerView.leadingAnchor),
             bannerBlurView.trailingAnchor.constraint(equalTo: bannerView.trailingAnchor),
         ])
-
+        
         bannerView.addSubview(contentBlurView)
-
+        
         NSLayoutConstraint.activate([
             contentBlurView.topAnchor.constraint(equalTo: bannerView.topAnchor),
             contentBlurView.bottomAnchor.constraint(equalTo: bannerView.bottomAnchor),
             contentBlurView.leadingAnchor.constraint(equalTo: bannerView.leadingAnchor),
             contentBlurView.trailingAnchor.constraint(equalTo: bannerView.trailingAnchor),
         ])
-
+        
         bannerView.addSubview(bannerImage)
-
+        
         contentBlurView.contentView.addSubview(bannerBottomView)
-
+        
         NSLayoutConstraint.activate([
             bannerImage.topAnchor.constraint(equalTo: bannerView.topAnchor),
             bannerImage.leadingAnchor.constraint(equalTo: bannerView.leadingAnchor, constant: 16),
             bannerImage.trailingAnchor.constraint(equalTo: bannerView.trailingAnchor, constant: -16),
-
+            
             bannerBottomView.topAnchor.constraint(equalTo: bannerImage.bottomAnchor),
             bannerBottomView.bottomAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: 20),
             bannerBottomView.leadingAnchor.constraint(equalTo: bannerView.leadingAnchor),
             bannerBottomView.trailingAnchor.constraint(equalTo: bannerView.trailingAnchor),
         ])
-
+        
         bannerBottomView.addSubview(bannerTitle)
         bannerBottomView.addSubview(bannerSubtitle)
         bannerBottomView.addSubview(bannerDescription)
-
+        
         NSLayoutConstraint.activate([
             bannerTitle.topAnchor.constraint(equalTo: bannerBottomView.topAnchor),
             bannerTitle.leadingAnchor.constraint(equalTo: bannerBottomView.leadingAnchor, constant: 16),
             bannerTitle.trailingAnchor.constraint(equalTo: bannerBottomView.trailingAnchor, constant: -16),
-
+            
             bannerSubtitle.topAnchor.constraint(equalTo: bannerTitle.bottomAnchor, constant: 8),
             bannerSubtitle.leadingAnchor.constraint(equalTo: bannerBottomView.leadingAnchor, constant: 16),
-
+            
             bannerDescription.topAnchor.constraint(equalTo: bannerSubtitle.bottomAnchor, constant: 8),
             bannerDescription.leadingAnchor.constraint(equalTo: bannerBottomView.leadingAnchor, constant: 16),
             bannerDescription.trailingAnchor.constraint(equalTo: bannerBottomView.trailingAnchor, constant: -16),
@@ -282,18 +283,18 @@ class FeaturedViewController: UIViewController {
     func configureRecentHandbooks() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        scrollView.addSubview(recentHandbooksLabel)
-        
+
+        contentView.addSubview(recentHandbooksLabel)
+
         NSLayoutConstraint.activate([
             recentHandbooksLabel.topAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: 35),
             recentHandbooksLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             recentHandbooksLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
         ])
-        
+
         collectionView.isScrollEnabled = false
-        scrollView.addSubview(collectionView)
-        
+        contentView.addSubview(collectionView)
+
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: recentHandbooksLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -308,8 +309,8 @@ class FeaturedViewController: UIViewController {
         tableView.bounces = false
         tableView.isScrollEnabled = false
         
-        scrollView.addSubview(recentCoursesLabel)
-        scrollView.addSubview(tableView)
+        contentView.addSubview(recentCoursesLabel)
+        contentView.addSubview(tableView)
         
         var totalHeight: CGFloat = 0
         
@@ -343,24 +344,24 @@ class FeaturedViewController: UIViewController {
 }
 
 
-extension FeaturedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var handbookCardWidth: CGFloat {
+extension CoursesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    private var handbookCellWidth: CGFloat {
         150
     }
     
-    var handbookCardHeight: CGFloat {
+    private var handbookCellHeight: CGFloat {
         257
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return handbooks.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HandbookCell.identifier, for: indexPath) as! HandbookCell
         let handbook = handbooks[indexPath.item]
-        
-        cell.containerView.frame = CGRect(x: 0, y: 0, width: handbookCardWidth, height: handbookCardHeight)
+
+        cell.containerView.frame = CGRect(x: 0, y: 0, width: self.handbookCellWidth, height: self.handbookCellHeight)
         cell.cellTitle.text = handbook.courseTitle
         cell.cellSubtitle.text = handbook.courseSubtitle
         cell.cellDescription.text = handbook.courseDescription
@@ -368,22 +369,21 @@ extension FeaturedViewController: UICollectionViewDelegate, UICollectionViewData
         cell.imageView.image = handbook.courseBanner
         cell.logoView.image = handbook.courseIcon
         
-        cell.configure()
-        
+        cell.setupUI()
+
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: handbookCardWidth, height: handbookCardHeight)
+        return CGSize(width: self.handbookCellWidth, height: self.handbookCellHeight)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
 }
 
-extension FeaturedViewController: UITableViewDelegate, UITableViewDataSource {
+extension CoursesViewController: UITableViewDelegate, UITableViewDataSource {
     var tableCardSize: CGFloat {
         350
     }
@@ -422,9 +422,28 @@ extension FeaturedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let course = courses[indexPath.section]
+        let courseViewController = CourseViewController()
+        courseViewController.course = course
         
-        print(course)
-//        performSegue(withIdentifier: "popupCourse", sender: course)
+        courseViewController.modalPresentationStyle = .fullScreen
+        courseViewController.modalTransitionStyle = .coverVertical
+        
+        present(courseViewController, animated: true)
     }
 }
 
+extension CoursesViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.lastScrollYPosition = scrollView.contentOffset.y
+        let totalScrollHeight = scrollView.contentSize.height
+        let percentage = lastScrollYPosition / totalScrollHeight
+        
+        if percentage <= 0.1 {
+            self.title = "Featured"
+        } else if percentage <= 0.3 {
+            self.title = "Handbooks"
+        } else {
+            self.title = "Courses"
+        }
+    }
+}

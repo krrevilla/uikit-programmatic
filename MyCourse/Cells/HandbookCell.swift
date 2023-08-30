@@ -117,7 +117,18 @@ class HandbookCell: UICollectionViewCell {
         self.layoutIfNeeded()
     }
     
-    public func configure() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupUI()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         setupUI()
     }
     
@@ -133,7 +144,6 @@ class HandbookCell: UICollectionViewCell {
         
         gradientLayer.frame = containerView.frame
         containerView.layer.insertSublayer(gradientLayer, at: 0)
-        
         
         containerView.addSubview(containerBlurView)
         
